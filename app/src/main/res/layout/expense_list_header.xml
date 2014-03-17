@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="100dp">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/imageView"
+        android:src="@drawable/expenses_header_background"
+        android:cropToPadding="false"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:background="@color/expenses_head_background"
+        android:alpha="0.50">
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="14 Maart 2014"
+            android:textColor="@color/expenses_head_text"
+            android:id="@+id/totalExpensesDate"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:textStyle="italic"
+            android:shadowColor="@color/expenses_head_text_shadow"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="3"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="€123.45"
+            android:textColor="@color/expenses_head_text"
+            android:id="@+id/totalExpensesAmount"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_horizontal"
+            android:textSize="32dp"
+            android:textStyle="bold"
+            android:shadowColor="@color/expenses_head_text_shadow"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="3"/>
+    </LinearLayout>
+
+</FrameLayout>

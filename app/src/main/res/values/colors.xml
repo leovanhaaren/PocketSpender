@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="expenses_head_text">#FFF</color>
+    <color name="expenses_head_text_shadow">#000</color>
+    <color name="expenses_head_background">#000</color>
+
+    <color name="expense_primary">#6eb6b0</color>
+    <color name="expense_secondary">#cacaca</color>
+    <color name="expense_text">#ff555555</color>
+
+    <color name="expense_category_selected">#ffa4cdc9</color>
+</resources>
