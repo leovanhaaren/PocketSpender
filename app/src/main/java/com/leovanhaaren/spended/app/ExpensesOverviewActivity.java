@@ -7,12 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leovanhaaren.spended.app.data.ExpensesRepository;
+import com.leovanhaaren.spended.app.listener.SwipeDismissListViewTouchListener;
 import com.leovanhaaren.spended.app.model.Expense;
 
 import java.text.SimpleDateFormat;
@@ -82,22 +82,32 @@ public class ExpensesOverviewActivity extends TrackedActivity {
         // Update header
         updateHeader();
 
-        // Add delete methodw
-        listview.setOnItemLongClickListener(new OnItemLongClickListener() {
-            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                Expense expense = (Expense) adapter.getItem(position -1);
-                repository.delete(expense);
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        listview,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
 
-                expenses.remove(position -1);
-                adapter.notifyDataSetChanged();
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    Expense expense = (Expense) adapter.getItem(position - 1);
+                                    expenses.remove(expense);
+                                    repository.delete(expense);
+                                }
+                                adapter.notifyDataSetChanged();
+                                updateHeader();
 
-                updateHeader();
-
-                Toast.makeText(getApplicationContext(), "Removed expense", Toast.LENGTH_SHORT).show();
-
-                return true;
-            }
-        });
+                                Toast.makeText(getApplicationContext(), "Removed expense", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+        listview.setOnTouchListener(touchListener);
+        // Setting this scroll listener is required to ensure that during ListView scrolling,
+        // we don't look for swipes.
+        listview.setOnScrollListener(touchListener.makeScrollListener());
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
